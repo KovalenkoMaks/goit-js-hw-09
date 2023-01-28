@@ -31,7 +31,7 @@ refs.formEl.addEventListener('submit', event => {
       });
   }
 
-  position = 0;
+  // position = 0;
   setTimeout(() => {
     refs.formBtn.removeAttribute('disabled', '');
   }, total);
