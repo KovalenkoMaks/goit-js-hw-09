@@ -1,20 +1,19 @@
 import Notiflix from 'notiflix';
 const refs = {
   formEl: document.querySelector('form'),
-  delayInput: document.querySelector('input[name=delay]'),
-  stepInput: document.querySelector('input[name=step]'),
-  amountInput: document.querySelector('input[name=amount]'),
-  formBtn: document.querySelector('button'),
 };
 
 refs.formEl.addEventListener('submit', event => {
   event.preventDefault();
-  refs.formBtn.setAttribute('disabled', '');
-  let delay = Number(refs.delayInput.value);
-  let step = Number(refs.stepInput.value);
-  let amount = Number(refs.amountInput.value);
+
+  let delay = Number(refs.formEl.elements['delay'].value);
+  let step = Number(refs.formEl.elements['step'].value);
+  let amount = Number(refs.formEl.elements['amount'].value);
   let firstDelay = 0;
   let total = delay + amount * step;
+  let formBtn = event.target.querySelector('button');
+
+  formBtn.setAttribute('disabled', '');
 
   for (let position = 0; position < amount; position += 1) {
     firstDelay = delay + step * position;
@@ -31,9 +30,8 @@ refs.formEl.addEventListener('submit', event => {
       });
   }
 
-  // position = 0;
   setTimeout(() => {
-    refs.formBtn.removeAttribute('disabled', '');
+    formBtn.removeAttribute('disabled', '');
   }, total);
 });
 
